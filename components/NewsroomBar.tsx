@@ -24,7 +24,7 @@ async function callStep(step: Step, days: number, secret: string): Promise<unkno
     headers: secret ? { "x-admin-secret": secret } : {},
   });
   const body = await res.json().catch(() => ({}));
-  if (res.status === 401) throw new Error("Secret admin requis : renseignez-le dans les réglages.");
+  if (res.status === 401) throw new Error("Secret admin manquant ou incorrect : vérifiez-le dans les réglages.");
   if (!res.ok) throw new Error(body.error ?? `Erreur ${res.status}`);
   return body;
 }
